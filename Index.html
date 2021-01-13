@@ -14,51 +14,24 @@
                                                              
         <script type="text/processing">
                   
-  
-       import processing.sound.*;
+             void setup() {
+         size(640, 360);
+         noStroke();
+        }
 
-       AudioIn input;
-       Amplitude analyzer;
-
-   void setup() {
-       size(1920, 1080);
-       background(255, 0, 0);
-
-  // Start listening to the microphone
-  // Create an Audio input and grab the 1st channel
-      input = new AudioIn(this, 0);
-
-  // start the Audio Input
-      input.start();
-
-  // create a new Amplitude analyzer
-     analyzer = new Amplitude(this);
-
-  // Patch the input to an volume analyzer
-      analyzer.input(input);
-   }
-
-void draw() {
-  // Get the overall volume (between 0 and 1.0)
-  float volume = analyzer.analyze();
-
-  // If the volume is greater than 0.5 a circle is drawn at a random location in the window. 
-  // The louder the volume, the larger the circle.
-  float threshold = 0.1;
-  if (volume > threshold) {
-    stroke(0);
-    strokeWeight(5);
-    fill(255,0,0);
-    ellipse(random(40, width), random(height), 40, 40);
-    }
-
-  
- }          
- 
+    void draw() {
+         background(0);
+         // Scale the mouseX value from 0 to 640 to a range between 0 and 175
+         float c = map(mouseX, 0, width, 0, 175);
+         // Scale the mouseX value from 0 to 640 to a range between 40 and 300
+         float d = map(mouseX, 0, width, 40, 300);
+         fill(255, c, 0);
+         ellipse(width/2, height/2, d, d);   
+        }
                                       
         </script>
         <canvas id="sketch" style="border: 1px solid black;"></canvas>
          
         </body>
                                                             
-     </html>                                                    
+     </html>               
