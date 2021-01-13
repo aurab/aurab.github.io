@@ -14,7 +14,47 @@
                                                              
         <script type="text/processing">
                   
-              /* PUT YOUR CODE HERE */
+  
+       import processing.sound.*;
+
+       AudioIn input;
+       Amplitude analyzer;
+
+   void setup() {
+       size(1920, 1080);
+       background(255, 0, 0);
+
+  // Start listening to the microphone
+  // Create an Audio input and grab the 1st channel
+      input = new AudioIn(this, 0);
+
+  // start the Audio Input
+      input.start();
+
+  // create a new Amplitude analyzer
+     analyzer = new Amplitude(this);
+
+  // Patch the input to an volume analyzer
+      analyzer.input(input);
+   }
+
+void draw() {
+  // Get the overall volume (between 0 and 1.0)
+  float volume = analyzer.analyze();
+
+  // If the volume is greater than 0.5 a circle is drawn at a random location in the window. 
+  // The louder the volume, the larger the circle.
+  float threshold = 0.1;
+  if (volume > threshold) {
+    stroke(0);
+    strokeWeight(5);
+    fill(255,0,0);
+    ellipse(random(40, width), random(height), 40, 40);
+    }
+
+  
+ }          
+ 
                                       
         </script>
         <canvas id="sketch" style="border: 1px solid black;"></canvas>
